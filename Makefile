@@ -20,4 +20,6 @@ clean:
 	if exist $(OUT_DIR) rmdir /S /Q $(OUT_DIR)
 	if exist obj rmdir /S /Q obj
 
-.PHONY: all pdollar run clean
+.PHONY: all pdollar run cleanar.exe
+
+.PHONY: clean run

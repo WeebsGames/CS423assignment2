@@ -1,0 +1,3 @@
+# dotnet build output (see OUT_DIR in Makefile)
+/bin/
+/obj/
