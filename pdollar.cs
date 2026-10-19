@@ -35,7 +35,9 @@ class Pdollar
         {
             if(args[i] == "-t")
             {
-                
+                string file = args[i+1];
+                File.Copy(file, path, true);
+                Console.WriteLine($"Added {args[i+1]} to gesture maps");
                 return 0;
             }
             if(args[i] == "-r")
@@ -44,11 +46,12 @@ class Pdollar
                 {
                     file.Delete();
                 }
+                Console.WriteLine("Successfully deleted all gesture maps");
                 return 0;
             }
             if(args[i] == "eventstream")
             {
-                
+                return 0;
             }
         }
 
