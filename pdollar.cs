@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Data;
 using System.IO;
+using System.IO.Enumeration;
 class Pdollar
 {
     static int Main(string[] args)
@@ -35,9 +36,17 @@ class Pdollar
         {
             if(args[i] == "-t")
             {
-                string file = args[i+1];
-                File.Copy(file, path, true);
-                Console.WriteLine($"Added {args[i+1]} to gesture maps");
+                string filePath = args[i+1];
+                string fileName;
+                if(filePath.LastIndexOf('\\') < 0)
+                {
+                    fileName = filePath;
+                } else
+                {
+                    fileName = filePath.Substring(filePath.LastIndexOf('\\'));
+                }
+                File.Copy(filePath, path + fileName, true);
+                Console.WriteLine($"Added {fileName} to gesture maps");
                 return 0;
             }
             if(args[i] == "-r")
@@ -51,6 +60,7 @@ class Pdollar
             }
             if(args[i] == "eventstream")
             {
+                
                 return 0;
             }
         }
