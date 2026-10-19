@@ -58,9 +58,18 @@ class Pdollar
                 Console.WriteLine("Successfully deleted all gesture maps");
                 return 0;
             }
-            if(args[i] == "eventstream")
+            if(File.Exists(args[i]))
             {
+                string[] lines = File.ReadAllLines(args[i]);
+                string first = lines[0];
+                if (first != "MOUSEDOWN")
+                {
+                    Console.WriteLine("Not a valid eventstream");
+                    return -1;
+                }
+
                 
+
                 return 0;
             }
         }
