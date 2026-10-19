@@ -1,15 +1,16 @@
-
-
 using System.Runtime.InteropServices;
-
-static int Main(string[] args)
+using System;
+class Pdollar
 {
-    if (args.Count < 2){
-        Console.WriteLine("not enough arguments");
-        return -1;
+    static int Main(string[] args)
+    {
+        if (args.Length < 1){
+            Console.WriteLine("not enough arguments ("+ args.Length + " provided, 1 needed)");
+            return -1;
+        }
+        
+        
+        
+        return 0;
     }
-    
-    
-    
-    return 0;
 }
