@@ -1,28 +1,23 @@
-# Locate the C# compiler: use CSC if given (make CSC=...), else csc.exe on PATH,
-# else the newest .NET Framework csc.exe under the Windows directory.
-WINDOWS_DIR := $(subst \,/,$(or $(SystemRoot),$(SYSTEMROOT),$(windir),$(WINDIR),C:/Windows))
-ifeq ($(origin CSC),undefined)
-  ifneq ($(strip $(shell where csc.exe 2>NUL)),)
-    CSC := csc.exe
-  else
-    CSC := $(lastword $(sort $(wildcard $(WINDOWS_DIR)/Microsoft.NET/Framework/v*/csc.exe)))
-    CSC64 := $(lastword $(sort $(wildcard $(WINDOWS_DIR)/Microsoft.NET/Framework64/v*/csc.exe)))
-    CSC := $(or $(CSC64),$(CSC))
-  endif
-endif
-ifeq ($(strip $(CSC)),)
-  $(error Could not find csc.exe. Install the .NET Framework or run: make CSC="path\to\csc.exe")
+CONFIG ?= Release
+OUT_DIR := bin
+EXE := $(OUT_DIR)\Pdollar.exe
+
+ifeq ($(strip $(shell where dotnet 2>NUL)),)
+  $(error Could not find dotnet. Install the .NET SDK from https://dotnet.microsoft.com/download)
 endif
 
 all: pdollar
 
-pdollar: pdollar.cs
-	"$(CSC)" /out:Pdollar.exe pdollar.cs
+pdollar: pdollar.cs Pdollar.csproj
+	dotnet build Pdollar.csproj -c $(CONFIG) -o $(OUT_DIR) --nologo
 
-run: Pdollar.exe
-	.\Pdollar.exe
+# Pass program arguments with: make run ARGS="..."
+run: pdollar
+	$(EXE) $(ARGS)
 
 clean:
-	del /Q Pdollar.exe
+	dotnet clean Pdollar.csproj -c $(CONFIG) -o $(OUT_DIR) --nologo
+	if exist $(OUT_DIR) rmdir /S /Q $(OUT_DIR)
+	if exist obj rmdir /S /Q obj
 
-.PHONY: clean run
+.PHONY: all pdollar run clean
