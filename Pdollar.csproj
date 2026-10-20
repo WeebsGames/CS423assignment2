@@ -13,6 +13,11 @@
 
   <ItemGroup>
     <Compile Include="pdollar.cs" />
+    <Compile Include="$P\PDollarGestureRecognizer\Geometry.cs" />
+    <Compile Include="$P\PDollarGestureRecognizer\Gesture.cs" />
+    <Compile Include="$P\PDollarGestureRecognizer\Point.cs" />
+    <Compile Include="$P\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
+    <Compile Include="$P\PDollarDemo\GestureIO.cs" />
   </ItemGroup>
 
 </Project>
